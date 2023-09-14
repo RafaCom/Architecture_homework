@@ -5,21 +5,20 @@ from container import genre_service
 
 genre_ns = Namespace('genres')
 
-genre_schema = GenreSchema()
-genres_schema = GenreSchema(many=True)
-
 
 @genre_ns.route('/')
 class GenresView(Resource):
     def get(self):
         genres = genre_service.get_genres()
-        return genres_schema.dump(genres), 200
+        result = GenreSchema(many=True).dump(genres)
+        return result, 200
 
 
 @genre_ns.route('/<int:gid>')
 class GenreView(Resource):
     def get(self, gid: int):
         genre = genre_service.get_one(gid)
-        return genre_schema.dump(genre), 200
+        result = GenreSchema().dump(genre)
+        return result, 200
 
 

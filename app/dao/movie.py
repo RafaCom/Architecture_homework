@@ -41,7 +41,7 @@ class MovieDAO:
         self.session.add(movie)
         self.session.commit()
 
-        return movie
+        return movie.id
 
     def update(self, movie):
         self.session.add(movie)
