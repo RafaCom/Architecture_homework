@@ -24,6 +24,14 @@ class MovieService:
 
         movie = self.get_one(mid)
 
+        movie.title = data.get('title')
+        movie.description = data.get('description')
+        movie.trailer = data.get('trailer')
+        movie.year = data.get('year')
+        movie.rating = data.get('rating')
+        movie.genre_id = data.get('genre_id')
+        movie.director_id = data.get('director')
+
         return self.movie_dao.update(movie)
 
     def update_partial(self, data):
