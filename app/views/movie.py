@@ -11,7 +11,19 @@ movie_ns = Namespace('movies')
 @movie_ns.route('/')
 class MoviesView(Resource):
     def get(self):
-        movies = movie_service.get_movies()
+        director_id = request.args.get('director_id')
+        genres_id = request.args.get('genre_id')
+        year = request.args.get('year')
+
+        if director_id:
+            movies = movie_service.get_by_director(director_id)
+        elif genres_id:
+            movies = movie_service.get_by_genre(genres_id)
+        elif year:
+            movies = movie_service.get_by_year(year)
+        else:
+            movies = movie_service.get_movies()
+
         result = MovieSchema(many=True).dump(movies)
         return result, 200
 

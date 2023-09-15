@@ -17,23 +17,17 @@ class MovieDAO:
         movie = self.session.query(Movie).get(mid)
         return movie
 
-    def get_movies_by_filter(self):
-        director_id = request.args.get('director_id')
-        genres_id = request.args.get('genres_id')
-        year = request.args.get('year')
+    def get_by_director(self, did):
+        movie = self.session.query(Movie).filter(Movie.director_id == did).all()
+        return movie
 
-        movies = self.session.query(Movie)
+    def get_by_genre(self, gid):
+        movie = self.session.query(Movie).filter(Movie.genre_id == gid).all()
+        return movie
 
-        if director_id:
-            movies = movies.filter(Movie.id == director_id)
-        if genres_id:
-            movies = movies.filter(Movie.id == genres_id)
-        if year:
-            movies = movies.filter(Movie.year == year)
-
-        movies = movies.all()
-
-        return movies
+    def get_by_year(self, year):
+        movie = self.session.query(Movie).filter(Movie.year == year).all()
+        return movie
 
     def create(self, data):
         movie = Movie(**data)

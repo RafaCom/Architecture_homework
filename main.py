@@ -92,7 +92,6 @@ def create_data(application):
             name=director[1]
         )
         all_directors.append(new_director)
-    # print(all_directors)
 
     with db.session.begin():
         db.session.add_all(all_directors)
@@ -102,8 +101,3 @@ if __name__ == '__main__':
     config = Config()
     app = create_app(config)
     app.run(host=config.HOST, port=config.PORT)
-
-
-"""
-проверить ДЗ по критериям и загрузить на ГИТХАБ
-"""
